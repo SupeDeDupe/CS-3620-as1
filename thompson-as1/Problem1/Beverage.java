@@ -18,4 +18,8 @@ public class Beverage extends AddonDecorator
 	public double cost() {
 		return 700 + room.cost();
 	}
+	
+	public double tax() {
+		return this.cost() * 0.06 + room.tax();
+	}
 }

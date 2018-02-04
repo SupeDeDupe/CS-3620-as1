@@ -12,4 +12,8 @@ public class Interior extends Room
 	public double cost() {
 		return 1000;
 	}
+	
+	public double tax() {
+		return cost() * 0.16;
+	}
 }

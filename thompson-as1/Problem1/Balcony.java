@@ -12,4 +12,8 @@ public class Balcony extends Room
 	public double cost() {
 		return 2000;
 	}
+	
+	public double tax() {
+		return cost() * 0.16;
+	}
 }

@@ -12,4 +12,8 @@ public class OceanView extends Room
 	public double cost() {
 		return 1500;
 	}
+	
+	public double tax() {
+		return cost() * 0.16;
+	}
 }

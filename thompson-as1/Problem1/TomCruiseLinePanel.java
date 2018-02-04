@@ -9,15 +9,26 @@ import java.awt.event.*;
  */
 public class TomCruiseLinePanel extends JPanel
 {
-   private JLabel addonLabel, roomLabel, headerLabel;
+   private JLabel addonLabel, roomLabel, headerLabel, taxesLabel, gratuityLabel, totalCostLabel;
    private JRadioButton interior, ocean, balcony, suite;
    private JCheckBox beverage, klondike, helicopter, climbing, lumberjack, scientology;
    private ButtonGroup roomButtons;
    private JButton compute;
-   private JPanel panel1, panel2, panel3, panel4;
+   private JPanel panel1, panel2, panel3, panel4, panel5;
+   private Room room;
+   
+   private double totalTaxes, gratuity, totalCost;
    
    public TomCruiseLinePanel()
    {
+      
+      taxesLabel = new JLabel ("");
+      taxesLabel.setFont (new Font ("Helvetica", Font.PLAIN, 15));
+      gratuityLabel = new JLabel ("");
+      gratuityLabel.setFont (new Font ("Helvetica", Font.PLAIN, 15));
+      totalCostLabel = new JLabel ("");
+      totalCostLabel.setFont (new Font ("Helvetica", Font.PLAIN, 15));
+      
       headerLabel = new JLabel ("Select Cruise Package");
       headerLabel.setFont (new Font ("Helvetica", Font.PLAIN, 22));
       roomLabel = new JLabel ("Room Selection");
@@ -32,8 +43,9 @@ public class TomCruiseLinePanel extends JPanel
       panel2 = new JPanel();
       panel3 = new JPanel();
       panel4 = new JPanel();
+      panel5 = new JPanel();
 
-      interior = new JRadioButton ("Interior - $1000", true);
+      interior = new JRadioButton ("Interior - $1000");
       interior.setBackground (Color.white);
       ocean = new JRadioButton ("Ocean View - $1500");
       ocean.setBackground (Color.white);
@@ -41,12 +53,6 @@ public class TomCruiseLinePanel extends JPanel
       balcony.setBackground (Color.white);
       suite = new JRadioButton ("Suite - $3000");
       suite.setBackground (Color.white);
-      
-      RoomListener roomListener = new RoomListener();
-      interior.addActionListener (roomListener);
-      ocean.addActionListener (roomListener);
-      balcony.addActionListener (roomListener);
-      suite.addActionListener (roomListener);
       
       beverage = new JCheckBox ("Beverage - $700");
       beverage.setBackground (Color.white);
@@ -61,14 +67,6 @@ public class TomCruiseLinePanel extends JPanel
       scientology = new JCheckBox ("Scientology - $500");
       scientology.setBackground (Color.white);
       
-      AddonListener addonListener = new AddonListener();
-      beverage.addItemListener (addonListener);
-      klondike.addItemListener (addonListener);
-      helicopter.addItemListener (addonListener);
-      climbing.addItemListener (addonListener);
-      lumberjack.addItemListener (addonListener);
-      scientology.addItemListener (addonListener);
-
       roomButtons.add(interior);
       roomButtons.add(ocean);
       roomButtons.add(balcony);
@@ -84,7 +82,7 @@ public class TomCruiseLinePanel extends JPanel
       panel2.add (balcony);
       panel2.add (suite);
       panel2.setBackground (Color.white);
-      panel2.setPreferredSize (new Dimension(750, 30));
+      panel2.setPreferredSize (new Dimension(1100, 30));
       
       panel3.add (addonLabel);
       panel3.add (beverage);
@@ -94,61 +92,27 @@ public class TomCruiseLinePanel extends JPanel
       panel3.add (lumberjack);
       panel3.add (scientology);
       panel3.setBackground (Color.white);
-      panel3.setPreferredSize (new Dimension(750, 30));
+      panel3.setPreferredSize (new Dimension(1100, 30));
       
       
       panel4.add(compute);
       panel4.setBackground (Color.white);
-      panel4.setPreferredSize (new Dimension(750, 100));
+      panel4.setPreferredSize (new Dimension(1100, 100));
+      
+      panel5.add(taxesLabel);
+      panel5.add(gratuityLabel);
+      panel5.add(totalCostLabel);
+      panel5.setBackground (Color.white);
+      panel5.setPreferredSize (new Dimension(1100, 100));
       
       add(panel1);
       add(panel2);
       add(panel3);
       add(panel4);
+      add(panel5);
 
       setBackground (Color.white);
-      setPreferredSize (new Dimension(750, 300));
-   }
-
-   //*****************************************************************
-   //  Represents the listener for add-on checkboxes.
-   //*****************************************************************
-   private class AddonListener implements ItemListener
-   {
-      public void itemStateChanged (ItemEvent event)
-      {
-         /*
-          int style = Font.PLAIN;
-
-         if (bold.isSelected())
-            style = Font.BOLD;
-
-         if (italic.isSelected())
-            style += Font.ITALIC;
-
-         beverageLabel.setFont (new Font ("Helvetica", style, 36));
-         */
-      }
-   }
-   
-   //*****************************************************************
-   //  Represents the listener for radio buttons.
-   //*****************************************************************
-   private class RoomListener implements ActionListener
-   {
-      public void actionPerformed (ActionEvent event)
-      {
-         Object source = event.getSource();
-         /*
-         if (source == comedy)
-            quote.setText (comedyQuote);
-         else
-            if (source == philosophy)
-               quote.setText (philosophyQuote);
-            else
-               quote.setText (carpentryQuote);
-               */
-      }
+      setPreferredSize (new Dimension(1100, 300));
    }
    
    //*****************************************************************
@@ -158,8 +122,34 @@ public class TomCruiseLinePanel extends JPanel
    {
       public void actionPerformed (ActionEvent event)
       {
-         /*count++;
-         label.setText("Pushes: " + count);*/
+         if (interior.isSelected())
+            room = new Interior();
+         else if (ocean.isSelected())
+            room = new OceanView();
+         else if (balcony.isSelected())
+            room = new Balcony();
+         else if (suite.isSelected())
+            room = new Suite();
+            
+         if (beverage.isSelected())
+            room = new Beverage(room);
+         if (klondike.isSelected())
+            room = new Klondike(room);
+         if (helicopter.isSelected())
+            room = new Helicopter(room);
+         if (climbing.isSelected())
+            room = new Climbing(room);
+         if (lumberjack.isSelected())
+            room = new Lumberjack(room);
+         if (scientology.isSelected())
+            room = new Scientology(room);
+            
+         gratuity = (room.cost()) * 0.15;
+         totalCost = room.cost() + room.tax() + gratuity;
+         
+         taxesLabel.setText("Total taxes: " + room.tax());
+         gratuityLabel.setText("Gratuity: " + gratuity);
+         totalCostLabel.setText("Total taxes: " + totalCost);
       }
    }
 }

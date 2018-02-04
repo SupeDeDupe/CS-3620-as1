@@ -5,4 +5,6 @@ comment1.params=
 comment1.target=java.lang.String\ getDescription()
 comment2.params=
 comment2.target=double\ cost()
-numComments=3
+comment3.params=
+comment3.target=double\ tax()
+numComments=4

@@ -14,4 +14,5 @@ public abstract class Room
 	}
  
 	public abstract double cost();
+	public abstract double tax();
 }

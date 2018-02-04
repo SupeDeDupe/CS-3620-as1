@@ -18,4 +18,8 @@ public class Lumberjack extends AddonDecorator
 	public double cost() {
 		return 15 + room.cost();
 	}
+	
+	public double tax() {
+		return this.cost() * 0.06 + room.tax();
+	}
 }

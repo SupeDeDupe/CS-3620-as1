@@ -18,4 +18,8 @@ public class Klondike extends AddonDecorator
 	public double cost() {
 		return 50 + room.cost();
 	}
+	
+	public double tax() {
+		return this.cost() * 0.06 + room.tax();
+	}
 }
