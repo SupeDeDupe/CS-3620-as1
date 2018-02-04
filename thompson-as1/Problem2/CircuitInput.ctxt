@@ -1,0 +1,6 @@
+#BlueJ class context
+comment0.params=initstate
+comment0.target=CircuitInput(boolean)
+comment1.params=newstate
+comment1.target=void\ setValue(boolean)
+numComments=2

@@ -1,0 +1,4 @@
+#BlueJ class context
+comment0.params=inp1\ inp2
+comment0.target=AndGate(Gate,\ Gate)
+numComments=1
