@@ -1,6 +1,8 @@
 #BlueJ class context
-comment0.params=temperature\ humidity\ pressure
-comment0.target=void\ update(float,\ float,\ float)
-comment1.params=
-comment1.target=void\ display()
-numComments=2
+comment0.params=weatherData
+comment0.target=CurrentConditionsDisplay(Subject)
+comment1.params=temperature\ humidity\ pressure
+comment1.target=void\ update(float,\ float,\ float)
+comment2.params=
+comment2.target=void\ display()
+numComments=3

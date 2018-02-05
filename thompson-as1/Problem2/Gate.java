@@ -6,6 +6,7 @@
 public class Gate
 {
     protected boolean state;
+    
     public boolean getState() 
     {
         return state;

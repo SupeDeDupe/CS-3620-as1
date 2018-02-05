@@ -1,6 +1,6 @@
 #BlueJ class context
-comment0.target=NotGate
-comment0.text=\n\ @author\ Sarah\ Thompson\n\ @version\ Feb\ 4,\ 2018\n
-comment1.params=inp
-comment1.target=NotGate(Gate)
+comment0.params=inp
+comment0.target=NotGate(Gate)
+comment1.params=
+comment1.target=void\ update()
 numComments=2
