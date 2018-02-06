@@ -10,6 +10,8 @@ public class Probe implements Observer
     {
         input = inp;
         state = input.getState();
+        input.registerObserver(this);
+        //System.out.println("Probe State: "+state);
     } 
     
     public void show()
@@ -20,5 +22,6 @@ public class Probe implements Observer
     public void update()
     {
         state = input.getState();
+        //System.out.println("Probe State: "+state);
     }
 }
